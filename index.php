@@ -3,40 +3,34 @@ header("Access-Control-Allow-Origin: *");
 header("Content-Type: application/json;");
 
     
-    $astralfox = file_get_contents('php://input');
-    $data = json_decode($astralfox, true);
+    $input = file_get_contents('php://input');
+    $json = json_decode($input, true);
 
-    $operation = $data['operation_type'];
-    $x = $data['x'];
-    $y = $data['y'];
-
-
-    switch ($operation) {
-    case "addition":
-       $result = $x + $y;
-        break;
-    case "subtraction":
-       $result = $x - $y;
-        break;
-    case "multiplication":
-       $result = $x * $y;
-        break;
-    case "division":
-       $result = $x / $y;
-        break;
-    default:
-        $result = "Invalid Operation";
-}
+    $operation_type = $json['operation_type'];
+    $x = $json['x'];
+    $y = $json['y'];
 
 
-    $olusameze = [
-  "slackUsername"=>"olusameze",
-   "result"=> $result,
-  "operation_type"=> $operation
-       ];
+    if ($operation_type == "addition") {
+        $result = $x + $y;
+    } elseif ($operation_type == "subtraction") {
+        $result = $x - $y;
+    } elseif ($operation_type == "multiplication") {
+        $result = $x * $y;
+    } else {
+          $result = "Invalid Operation";
+    }
+    
 
 
- echo json_encode($olusameze);
+    $final_output = [
+            "slackUsername"=>"AstralFox",
+            "result"=> $result,
+            "operation_type"=> $operation_type
+                    ];
+
+
+ echo json_encode($final_output);
 ?>
 
 

@@ -24,7 +24,7 @@ header("Content-Type: application/json;");
 
 
     $final_output = [
-            "slackUsername"=>"olusameze",
+            "slackUsername"=>"AstralFox",
             "result"=> $result,
             "operation_type"=> $operation_type
                     ];
